@@ -1,0 +1,6 @@
+gifs
+gifs/*
+
+*.save
+*.bak
+__*
