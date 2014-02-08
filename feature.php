@@ -1,11 +1,12 @@
 <?php
+include( 'config.php' );
 
 $preload = isset($_REQUEST['preload']) ? (bool)$_REQUEST['preload'] : false;
 $image   = isset($_REQUEST['img']) ? $_REQUEST['img'] : false;
 
 if ( !$image ) { die("Error loading Image"); }
 
-$json = file_get_contents("http://{$_SERVER['SERVER_NAME']}/gallery/list.php");
+$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
 $data = json_decode($json, true);
 
 $image_idx = array_search( $image, $data['images'] );

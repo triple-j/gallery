@@ -1,11 +1,10 @@
 <?php
+include( 'config.php' );
 
-#echo "<pre>";
 $files = array( "images"=>array() );
 
-foreach ( glob("gifs/*") as $file ) {
+foreach ( glob(DIR_IMAGES."*") as $file ) {
 	if ( preg_match("/\.(gif|jpg|jpeg|png)$/i", $file) ) {
-		#echo $file.PHP_EOL;
 		$files['images'] []= $file;
 	}
 }

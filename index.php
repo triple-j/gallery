@@ -1,8 +1,9 @@
 <?php
+include( 'config.php' );
 
-$numof = /*isset($_GET['numof']) ? $_GET['numof'] :*/ 60;
+$numof = IMAGES_PER_PAGE;
 
-$json = file_get_contents("http://{$_SERVER['SERVER_NAME']}/gallery/list.php");
+$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
 $data = json_decode($json, true);
 
 $total_imgs  = count($data['images']);
@@ -57,7 +58,7 @@ $total_pages = ceil( $total_imgs / $numof );
 				$('#gallery').on('click', '.img-thumb-box a', function(evt){
 					var img_link = $(this).attr('href');
 					console.log( {img_link:img_link, encode:encodeURIComponent(img_link)} );
-					location.href = "viewer.php#img:" + img_link;
+					location.href = "<?=FILE_VIEWER;?>#img:" + img_link;
 					evt.preventDefault();
 				});
 			});

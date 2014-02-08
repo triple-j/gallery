@@ -1,0 +1,29 @@
+<?php
+/**
+ * Define the webserver and path parameters
+ * DIR_FS_* = Filesystem directories (local/physical)
+ * DIR_WS_* = Webserver directories (virtual/URL)
+ */
+define('DOMAIN', $_SERVER['SERVER_NAME'] . ( !in_array($_SERVER['SERVER_PORT'], array(80, 443)) ? ':'.$_SERVER['SERVER_PORT'] : ''));
+define('DIR_WS_CATALOG', '/gallery/');
+define('DIR_FS_CATALOG', preg_replace("/\/$/", "", $_SERVER["DOCUMENT_ROOT"]) . DIR_WS_CATALOG);
+
+define('HTTP_SERVER', 'http://' . DOMAIN);
+define('HTTPS_SERVER', 'https://' . DOMAIN);
+
+define('DIR_IMAGES', "gifs/");
+
+define('FILE_JSON_LIST', "list.php");
+define('FILE_AJAX_LISTING', "page.php");
+define('FILE_AJAX_FEATURE', "feature.php");
+define('FILE_GALLERY', "index.php");
+define('FILE_VIEWER', "viewer.php");
+define('FILE_THUMBNAILER', "thumb.php");
+
+define('IMAGES_PER_PAGE', 60);
+define('IMAGES_PER_NAV', 5);
+
+define('THUMB_WIDTH', 128);
+define('THUMB_HEIGHT', 128);
+
+error_reporting(E_ALL);

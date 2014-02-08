@@ -1,6 +1,7 @@
 <?php
+include( 'config.php' );
 
-$json = file_get_contents("http://{$_SERVER['SERVER_NAME']}/gallery/list.php");
+$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
 $data = json_decode($json, true);
 
 $first_img = $data['images'][0];
@@ -77,7 +78,7 @@ $first_img = $data['images'][0];
 			}
 
 			function open_nav() {
-				$('#thumb-nav').load('page.php', {numof:5,rel:window.current_img}, function(){
+				$('#thumb-nav').load('<?=FILE_AJAX_LISTING;?>', {numof:<?=IMAGES_PER_NAV;?>,rel:window.current_img}, function(){
 					console.log("Thumb Navigation Updated");
 					display_nav( true );
 				});
@@ -120,7 +121,7 @@ $first_img = $data['images'][0];
 				$('#thumb-nav').on('click', '.img-thumb-box a', function(evt){
 					var img_link = $(this).attr('href');
 					//console.log( {img_link:img_link, encode:encodeURIComponent(img_link)} );
-					location.href = "viewer.php#img:" + img_link;
+					location.href = "<?=FILE_VIEWER;?>#img:" + img_link;
 					evt.preventDefault();
 				});
 			});
