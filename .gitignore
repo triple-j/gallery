@@ -4,3 +4,6 @@ gifs/*
 *.save
 *.bak
 __*
+
+# system files
+.fuse_hidden*
