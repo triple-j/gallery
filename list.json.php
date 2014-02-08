@@ -9,4 +9,5 @@ foreach ( glob(DIR_IMAGES."*") as $file ) {
 	}
 }
 
+header('Content-type: application/json; charset=utf-8');
 echo json_encode( $files, JSON_PRETTY_PRINT );
