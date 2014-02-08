@@ -48,7 +48,7 @@ $total_pages = ceil( $total_imgs / $numof );
 
 				console.log( {page:page, current:window.current_page} );
 
-				$('#gallery').load('page.php', {page:window.current_page});
+				$('#gallery').load('<?=FILE_AJAX_LISTING;?>', {page:window.current_page});
 			}
 
 			$(document).ready(function(){

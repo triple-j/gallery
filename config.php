@@ -13,8 +13,8 @@ define('HTTPS_SERVER', 'https://' . DOMAIN);
 
 define('DIR_IMAGES', "gifs/");
 
-define('FILE_JSON_LIST', "list.php");
-define('FILE_AJAX_LISTING', "page.php");
+define('FILE_JSON_LIST', "list.json.php");
+define('FILE_AJAX_LISTING', "image_list.php");
 define('FILE_AJAX_FEATURE', "feature.php");
 define('FILE_GALLERY', "index.php");
 define('FILE_VIEWER', "viewer.php");
