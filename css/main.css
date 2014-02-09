@@ -50,28 +50,58 @@ nav.pages li a {
 #viewer .nav-links {
 	display: none;
 }
+#viewer {
+	display: table;
+}
 #viewer .featured {
-	width: 480px;
-	height: 360px;
+	display: block;
+	width: auto;
+	height: 100%;
+
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
 }
 #viewer .featured img {
-	max-width: 100%;
-	max-height: 100%;
+	width: auto;
+	height: 100%;
+
+	/*max-width: 100%;
+	max-height: 100%;*/
+}
+#viewer .featured img.fit-width {
+	width: 100%;
+	height: auto;
+}
+
+.win-width,
+.win-height {
+	position: absolute;
+	overflow: hidden;
+	display: block;
+
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.win-width {
+	width: 480px;
+}
+.win-height {
+	height: 360px;
 }
 
 #nav-links .prev,
 #nav-links .next {
-	position: absolute;
 	top: 0px;
 
-	display: block;
-	width: 64px;
-	height: 360px;
+	width:33%;
 
-	border: 1px solid #f0f;
 	text-indent: 9999px;
 	overflow: hidden;
 	z-index: 500;
+
+	border: 1px solid #f0f;
 }
 #nav-links .prev {
 	left: 0px;
@@ -81,14 +111,16 @@ nav.pages li a {
 }
 
 #viewer {
-	position: absolute;
 	top: 0px;
 	left: 0px;
+
+	border: 1px solid #0f0;
 }
 
 #thumb-nav {
-	position: absolute;
 	bottom: 0px;
 	left: 0px;
 	z-index: 1000;
+
+	border: 1px solid #00f;
 }

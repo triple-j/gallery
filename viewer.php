@@ -24,8 +24,21 @@ $first_img = $data['images'][0];
 				"imgs_per_nav" : "<?=IMAGES_PER_NAV;?>"
 			});
 
+			function resize_elms() {
+				var width  = $(window).width(),
+				    height = $(window).height();
+
+				console.log({width:width,height:height});
+
+				$('.win-width').width( width - 16 );
+				$('.win-height').height( height - 16 );
+			}
+
 			$(document).ready(function(){
 				gallery_viewer.init('viewer');
+
+				$(window).on('resize', resize_elms);
+				resize_elms();
 			});
 
 		</script>
@@ -35,13 +48,13 @@ $first_img = $data['images'][0];
 		<!--h1>Image Viewer</h1-->
 
 		<nav id="nav-links">
-			<a class="prev" href="#img:prev">Prev</a>
-			<a class="next" href="#img:next">Next</a>
+			<a class="prev win-height" href="#img:prev">Prev</a>
+			<a class="next win-height" href="#img:next">Next</a>
 		</nav>
 
-		<div id="viewer"></div>
+		<div id="viewer" class="win-width win-height"></div>
 
-		<nav id="thumb-nav"></nav>
+		<nav id="thumb-nav" class="win-width"></nav>
 
 	</body>
 </html>
