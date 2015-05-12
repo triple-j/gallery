@@ -45,7 +45,7 @@
 			this.change_img(null, gallery);
 			this.display_nav();
 
-			$(document).on('keypress', function(evt){
+			$(document).on('keydown', function(evt){
 				gallery.key_pressed(evt, gallery);
 			});
 
