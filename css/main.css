@@ -101,7 +101,7 @@ nav.pages li a {
 	overflow: hidden;
 	z-index: 500;
 
-	border: 1px solid #f0f;
+	/*border: 1px solid #f0f;*/
 }
 #nav-links .prev {
 	left: 0px;
@@ -114,7 +114,7 @@ nav.pages li a {
 	top: 0px;
 	left: 0px;
 
-	border: 1px solid #0f0;
+	/*border: 1px solid #0f0;*/
 }
 
 #thumb-nav {
@@ -122,5 +122,5 @@ nav.pages li a {
 	left: 0px;
 	z-index: 1000;
 
-	border: 1px solid #00f;
+	/*border: 1px solid #00f;*/
 }
