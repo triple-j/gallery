@@ -1,9 +1,12 @@
 gifs
 gifs/*
+cache/*
 
 *.save
 *.bak
 __*
+
+!.empty
 
 # system files
 .fuse_hidden*
