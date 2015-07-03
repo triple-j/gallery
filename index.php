@@ -1,13 +1,14 @@
 <?php
-include( 'config.php' );
+//include( 'config.php' );
+require_once('config.php');
+require_once(DIR_TOOLS.'connect_db.php');
+require_once(DIR_INCLUDES.'pagination.php');
 
-$numof = IMAGES_PER_PAGE;
+$pagination = new Pagination($pdo, IMAGES_PER_PAGE);
 
-$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
-$data = json_decode($json, true);
+$current_page = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 1;
 
-$total_imgs  = count($data['images']);
-$total_pages = ceil( $total_imgs / $numof );
+$total_pages = $pagination->totalPages();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,32 +18,22 @@ $total_pages = ceil( $total_imgs / $numof );
 		<title>Image Gallery</title>
 
 		<link href="assets/css/main.css" rel="stylesheet" type="text/css" media="screen">
+
+		<script>
+			console.log("Current Page: <?=$current_page;?>");
+		</script>
 	</head>
 
 	<body>
 		<h1>Image Gallery</h1>
 
-		<nav class="pages">
-			<ul>
-				<li class="previous"><a href="#page-prev">&laquo;</a></li>
-<?php for ( $idx = 1; $idx <= $total_pages; $idx++ ) { ?>
-				<li class="numbered"><a href="#page-<?=$idx;?>"><?=$idx;?></a></li>
-<?php } ?>
-				<li class="next"><a href="#page-next">&raquo;</a></li>
-			</ul>
-		</nav>
+<?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
 
-		<div id="gallery"></div>
+		<div id="gallery">
+			<?php var_dump($pagination->getPage($current_page)); ?>
+		</div>
 
-		<nav class="pages">
-			<ul>
-				<li><a href="#page-prev">&laquo;</a></li>
-<?php for ( $idx = 1; $idx <= $total_pages; $idx++ ) { ?>
-				<li><a href="#page-<?=$idx;?>"><?=$idx;?></a></li>
-<?php } ?>
-				<li><a href="#page-next">&raquo;</a></li>
-			</ul>
-		</nav>
+<?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
 
 	</body>
 </html>

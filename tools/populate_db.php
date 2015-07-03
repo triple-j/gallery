@@ -36,7 +36,7 @@ foreach ( glob(DIR_FS_CATALOG.DIR_IMAGES."*") as $file ) {
 		$insert_data[':type'] = "FLASH";
 	}
 
-	if ( !is_null($insert_data) ) {
+	if ( !empty($insert_data) ) {
 		$sth->execute($insert_data);
 	}
 }

@@ -12,6 +12,8 @@ define('HTTP_SERVER', 'http://' . DOMAIN);
 define('HTTPS_SERVER', 'https://' . DOMAIN);
 
 define('DIR_IMAGES', "gifs/");
+define('DIR_INCLUDES', "includes/");
+define('DIR_HELPERS', "helpers/");
 define('DIR_CACHE', "cache/");
 define('DIR_TOOLS', "tools/");
 
@@ -21,7 +23,7 @@ define('FILE_AJAX_FEATURE', "feature.php");
 define('FILE_GALLERY', "index.php");
 define('FILE_VIEWER', "viewer.php");
 define('FILE_THUMBNAILER', "thumb.php");
-define('FILE_DATABASE', "database-v2.sq3");
+define('FILE_DATABASE', "database-v3.sq3");
 
 define('IMAGES_PER_PAGE', 60);
 define('IMAGES_PER_NAV', 5);

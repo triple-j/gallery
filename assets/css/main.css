@@ -23,6 +23,7 @@ nav.pages ul {
 	padding: 0;
 }
 
+nav.pages li strong,
 nav.pages li a {
 	display: inline-block;
 	margin: 2px;
