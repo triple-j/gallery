@@ -36,6 +36,7 @@ nav.pages li a {
 
 .img-thumb-box {
 	display: inline-block;
+	vertical-align: top;
 }
 
 .img-thumb-box a {
