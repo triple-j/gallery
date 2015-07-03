@@ -30,7 +30,7 @@ class Pagination
 		//$page_data[':end']   = $page_data[':start'] + $this->items_pre_page - 1;
 		$page_data[':count'] = $this->items_pre_page;
 
-		var_dump( $page_data );
+		//var_dump( $page_data );
 
 		$page_stmt->execute($page_data);
 

@@ -1,20 +1,12 @@
 <?php
-include( 'config.php' );
+/**
+ * Required Variables
+ *   $page_items
+ */
 
-$numof = isset($_REQUEST['numof']) ? $_REQUEST['numof'] : IMAGES_PER_PAGE;
-$page  = isset($_REQUEST['page']) ? $_REQUEST['page'] - 1 : 0;
-
-$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
-$data = json_decode($json, true);
-
-$start_rel_to = isset($_REQUEST['rel']) ? array_search($_REQUEST['rel'],$data['images']) : false;
-
-$start = ($start_rel_to===false) ? $page * $numof : $start_rel_to;
-$end   = $start + $numof;
-
-for ( $idx = $start; $idx < $end; $idx++ ) {
-	$orig_src = $data['images'][$idx];
-	$thmb_src = FILE_THUMBNAILER . "?src={$orig_src}";
+for ( $idx = 0; $idx < count($page_items); $idx++ ) {
+	$orig_src = $page_items[$idx]['filename'];
+	$thmb_src = $page_items[$idx]['type'] === "IMAGE" ? FILE_THUMBNAILER . "?src={$orig_src}" : "assets/placeholder.gif";
 ?>
 	<div class="img-thumb-box">
 		<a href="<?=$orig_src;?>">

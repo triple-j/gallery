@@ -7,6 +7,7 @@ require_once(DIR_INCLUDES.'pagination.php');
 $pagination = new Pagination($pdo, IMAGES_PER_PAGE);
 
 $current_page = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 1;
+$page_items = $pagination->getPage($current_page);
 
 $total_pages = $pagination->totalPages();
 ?>
@@ -30,7 +31,7 @@ $total_pages = $pagination->totalPages();
 <?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
 
 		<div id="gallery">
-			<?php var_dump($pagination->getPage($current_page)); ?>
+<?php require(DIR_HELPERS.'image_list.php'); ?>
 		</div>
 
 <?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
