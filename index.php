@@ -19,6 +19,9 @@ $total_pages = $pagination->totalPages();
 
 		<link href="assets/css/main.css" rel="stylesheet" type="text/css" media="screen">
 
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="assets/javascript/main.js"></script>
+
 		<script>
 			console.log("Current Page: <?=$current_page;?>");
 		</script>
@@ -35,5 +38,7 @@ $total_pages = $pagination->totalPages();
 
 <?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
 
+		<div id="overlay"></div>
+		<div id="viewer"></div>
 	</body>
 </html>
