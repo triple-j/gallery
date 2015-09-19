@@ -9,7 +9,7 @@ for ( $idx = 0; $idx < count($page_items); $idx++ ) {
 	$thmb_src = $page_items[$idx]['type'] === "IMAGE" ? FILE_THUMBNAILER . "?src={$orig_src}" : "assets/placeholder.gif";
 ?>
 	<div class="img-thumb-box">
-		<a href="<?=$orig_src;?>">
+		<a href="<?=FILE_VIEWER . "?src=" . $orig_src;?>">
 			<img src="<?=$thmb_src;?>" />
 		</a>
 	</div>

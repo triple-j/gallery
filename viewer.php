@@ -1,60 +1,61 @@
 <?php
-include( 'config.php' );
+require_once('config.php');
+require_once(DIR_TOOLS.'connect_db.php');
+require_once(DIR_INCLUDES.'pagination.php');
 
-$json = file_get_contents( HTTP_SERVER . DIR_WS_CATALOG . FILE_JSON_LIST );
-$data = json_decode($json, true);
+$pagination = new Pagination($pdo, IMAGES_PER_PAGE);
 
-$first_img = $data['images'][0];
+$image = $_REQUEST['src'];
+
+$surrounding_items = $pagination->surroundingItems($image,4);
+$prev_src = empty($surrounding_items['leading']) ? null : $surrounding_items['leading'][0]['filename'];
+$next_src = empty($surrounding_items['trailing']) ? null : $surrounding_items['trailing'][0]['filename'];
+
+$item_type = $surrounding_items['current']['type'];
+$item_src = $image;
+
+$gallery_page = $surrounding_items['current']['page_number'];
+#var_dump($surrounding_items);
+
+$page_items = $surrounding_items['list'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-		<link href="css/main.css" rel="stylesheet" type="text/css" media="screen">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="javascript/gallery.js"></script>
-		<script>
+		<title>Image Viewer</title>
 
-			var gallery_viewer = new Gallery({
-				"VIEWER"       : "<?=FILE_VIEWER;?>",
-				"AJAX_LISTING" : "<?=FILE_AJAX_LISTING;?>",
-				"AJAX_FEATURE" : "<?=FILE_AJAX_FEATURE;?>",
-				"current_img"  : "<?=$first_img;?>",
-				"imgs_per_nav" : "<?=IMAGES_PER_NAV;?>"
-			});
-
-			function resize_elms() {
-				var width  = $(window).width(),
-				    height = $(window).height();
-
-				console.log({width:width,height:height});
-
-				$('.win-width').width( width - 16 );
-				$('.win-height').height( height - 16 );
-			}
-
-			$(document).ready(function(){
-				gallery_viewer.init('viewer');
-
-				$(window).on('resize', resize_elms);
-				resize_elms();
-			});
-
-		</script>
+		<link href="assets/css/main.css" rel="stylesheet" type="text/css" media="screen">
 	</head>
 
 	<body>
 		<!--h1>Image Viewer</h1-->
 
 		<nav id="nav-links">
-			<a class="prev win-height" href="#img:prev">Prev</a>
-			<a class="next win-height" href="#img:next">Next</a>
+			<a class="prev win-height" href="<?=FILE_VIEWER . "?src=" . $prev_src;?>">Prev</a>
+			<a class="next win-height" href="<?=FILE_VIEWER . "?src=" . $next_src;?>">Next</a>
 		</nav>
 
-		<div id="viewer" class="win-width win-height"></div>
+		<div id="viewer">
+			<!--div class="featured"-->
+<?php if ( $item_type == "VIDEO" ) { ?>
+				<video src="<?=$item_src;?>" autoplay loop>
+					This browser doesn't support embedded videos.
+				</video>
+<?php } else { ?>
+				<img src="<?=$image;?>" />
+<?php } ?>
+			<!--/div-->
+		</div>
 
-		<nav id="thumb-nav" class="win-width"></nav>
+		<nav>
+			<a href="<?=FILE_GALLERY."?page=".$gallery_page;?>">Back to Gallery</a>
+		</nav>
+
+		<nav id="thumb-nav">
+<?php require(DIR_HELPERS.'image_list.php'); ?>
+		</nav>
 
 	</body>
 </html>
