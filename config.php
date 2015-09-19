@@ -22,6 +22,7 @@ define('FILE_AJAX_LISTING', "image_list.php");
 define('FILE_AJAX_FEATURE', "feature.php");
 define('FILE_GALLERY', "index.php");
 define('FILE_VIEWER', "viewer.php");
+define('FILE_SURROUND', "surrounding.php");
 define('FILE_THUMBNAILER', "thumb.php");
 define('FILE_DATABASE', "database-v3.sq3");
 

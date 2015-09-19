@@ -15,9 +15,6 @@ $item_type = $surrounding_items['current']['type'];
 $item_src = $image;
 
 $gallery_page = $surrounding_items['current']['page_number'];
-#var_dump($surrounding_items);
-
-$page_items = $surrounding_items['list'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +29,6 @@ $page_items = $surrounding_items['list'];
 	<body>
 		<!--h1>Image Viewer</h1-->
 
-		<nav id="nav-links">
-			<a class="prev win-height" href="<?=FILE_VIEWER . "?src=" . $prev_src;?>">Prev</a>
-			<a class="next win-height" href="<?=FILE_VIEWER . "?src=" . $next_src;?>">Next</a>
-		</nav>
-
 		<div id="viewer">
 			<!--div class="featured"-->
 <?php if ( $item_type == "VIDEO" ) { ?>
@@ -47,14 +39,19 @@ $page_items = $surrounding_items['list'];
 				<img src="<?=$image;?>" />
 <?php } ?>
 			<!--/div-->
+
+			<nav class="image-nav">
+				<a class="prev" href="<?=FILE_VIEWER . "?src=" . $prev_src;?>">Prev</a>
+				<a class="next" href="<?=FILE_VIEWER . "?src=" . $next_src;?>">Next</a>
+			</nav>
 		</div>
 
-		<nav>
-			<a href="<?=FILE_GALLERY."?page=".$gallery_page;?>">Back to Gallery</a>
+		<nav id="nav-links">
+			<a class="gallery" href="<?=FILE_GALLERY."?page=".$gallery_page;?>">Back to Gallery</a>
+			<a class="surrounding" href="<?=FILE_SURROUND."?src=".$image;?>">Surrounding Images</a>
 		</nav>
 
 		<nav id="thumb-nav">
-<?php require(DIR_HELPERS.'image_list.php'); ?>
 		</nav>
 
 	</body>
