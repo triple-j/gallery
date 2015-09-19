@@ -39,6 +39,8 @@ $total_pages = $pagination->totalPages();
 <?php require(DIR_HELPERS.'pagination_navigation.php'); ?>
 
 		<div id="overlay"></div>
-		<div id="viewer"></div>
+		<div id="popup">
+			<div id="viewer"></div>
+		</div>
 	</body>
 </html>
