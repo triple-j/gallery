@@ -10,7 +10,7 @@ $thumb_height = THUMB_HEIGHT;
 
 $cache_name = "cache/".md5($filename.$thumb_width.$thumb_height)."_thumb.png";
 
-if( !file_exists($cache_name) || true ) {
+if( !file_exists($cache_name) ) {
 	// Get new sizes
 	list($width, $height) = getimagesize($filename);
 	$ratio = $width / $height;
