@@ -32,11 +32,11 @@ $gallery_page = $surrounding_items['current']['page_number'];
 		<div id="viewer">
 			<div class="featured">
 <?php if ( $item_type == "VIDEO" ) { ?>
-				<video src="<?=$item_src;?>" autoplay loop>
+				<video class="media" src="<?=$item_src;?>" autoplay loop>
 					This browser doesn't support embedded videos.
 				</video>
 <?php } else { ?>
-				<img src="<?=$image;?>" />
+				<img class="media" src="<?=$image;?>" />
 <?php } ?>
 			</div>
 

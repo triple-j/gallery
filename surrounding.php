@@ -27,10 +27,10 @@ $page_items = $surrounding_items['list'];
 	<body>
 
 		<nav id="thumb-nav">
+			<a class="prev" href="<?=FILE_SURROUND . "?src={$prev_src}&offset={$offset}";?>">Prev</a>
 			<div class="images">
 <?php require(DIR_HELPERS.'image_list.php'); ?>
 			</div>
-			<a class="prev" href="<?=FILE_SURROUND . "?src={$prev_src}&offset={$offset}";?>">Prev</a>
 			<a class="next" href="<?=FILE_SURROUND . "?src={$next_src}&offset={$offset}";?>">Next</a>
 		</nav>
 

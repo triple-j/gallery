@@ -70,7 +70,7 @@ nav.pages li a {
 	text-align: center;
 	vertical-align: middle;
 }
-#viewer .featured > * {
+#viewer .featured .media {
 	float: left;  /* get rid of extra padding caused by whitespace */
 }
 #viewer .image-nav {
