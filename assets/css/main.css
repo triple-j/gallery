@@ -1,4 +1,4 @@
-
+/*START: general styles */
 body {
 	background-color: #333;
 	color: #ccc;
@@ -12,7 +12,9 @@ a:hover {
 	color: #aaa;
 	text-decoration: underline;
 }
+/*END: general styles */
 
+/*START: pagination */
 nav.pages li {
 	display: inline-block;
 	margin: 0;
@@ -33,7 +35,9 @@ nav.pages li a {
 	/*height: 20px;*/
 	text-align: center;
 }
+/*END: pagination */
 
+/*START: thumbnails */
 .img-thumb-box {
 	display: inline-block;
 	vertical-align: top;
@@ -48,81 +52,64 @@ nav.pages li a {
 	background-color: #222;
 	border: 1px solid #111;
 }
+/*END: thumbnails */
 
-#viewer .nav-links {
-	display: none;
-}
+/*START: image viewer */
 #viewer {
+	position: relative;
 	display: table;
+
+	box-sizing: border-box;
+
+	padding: 8px;
+	background-color: #222;
+	border: 1px solid #111;
 }
 #viewer .featured {
-	display: block;
-	width: auto;
-	height: 100%;
-
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
 }
-#viewer .featured img {
-	width: auto;
-	height: 100%;
-
-	/*max-width: 100%;
-	max-height: 100%;*/
+#viewer .featured > * {
+	float: left;  /* get rid of extra padding caused by whitespace */
 }
-#viewer .featured img.fit-width {
-	width: 100%;
-	height: auto;
-}
-
-.win-width,
-.win-height {
+#viewer .image-nav {
 	position: absolute;
-	overflow: hidden;
-	display: block;
+	top: 0px;
+	left: 0px;
 
-	margin: 0;
-	padding: 0;
-	border: 0;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
 }
-.win-width {
-	width: 480px;
-}
-.win-height {
-	height: 360px;
-}
+#viewer .image-nav .prev,
+#viewer .image-nav .next {
+	background-color: #222;
 
-#nav-links .prev,
-#nav-links .next {
+	position: absolute;
 	top: 0px;
 
-	width:33%;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 20%;
+	height: 100%;
 
 	text-indent: 9999px;
 	overflow: hidden;
-	z-index: 500;
 
-	/*border: 1px solid #f0f;*/
+	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-out;
+	transition: opacity 0.2s ease-out;
 }
-#nav-links .prev {
+#viewer .image-nav .prev {
 	left: 0px;
 }
-#nav-links .next {
+#viewer .image-nav .next {
 	right: 0px;
 }
-
-#viewer {
-	top: 0px;
-	left: 0px;
-
-	/*border: 1px solid #0f0;*/
+#viewer .image-nav:hover .prev,
+#viewer .image-nav:hover .next {
+	opacity: 0.67;
 }
+/*END: image viewer */
 
-#thumb-nav {
-	bottom: 0px;
-	left: 0px;
-	z-index: 1000;
-
-	/*border: 1px solid #00f;*/
-}

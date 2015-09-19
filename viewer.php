@@ -30,7 +30,7 @@ $gallery_page = $surrounding_items['current']['page_number'];
 		<!--h1>Image Viewer</h1-->
 
 		<div id="viewer">
-			<!--div class="featured"-->
+			<div class="featured">
 <?php if ( $item_type == "VIDEO" ) { ?>
 				<video src="<?=$item_src;?>" autoplay loop>
 					This browser doesn't support embedded videos.
@@ -38,7 +38,7 @@ $gallery_page = $surrounding_items['current']['page_number'];
 <?php } else { ?>
 				<img src="<?=$image;?>" />
 <?php } ?>
-			<!--/div-->
+			</div>
 
 			<nav class="image-nav">
 				<a class="prev" href="<?=FILE_VIEWER . "?src=" . $prev_src;?>">Prev</a>
