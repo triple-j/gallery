@@ -7,7 +7,7 @@ require_once(DIR_INCLUDES.'pagination.php');
 $pagination = new Pagination($pdo, IMAGES_PER_PAGE);
 
 $image = $_REQUEST['src'];
-$offset = isset($_REQUEST['offset']) ? $_REQUEST['offset'] : 4;
+$offset = isset($_REQUEST['offset']) ? $_REQUEST['offset'] : floor((IMAGES_PER_NAV) / 2);
 
 $surrounding_items = $pagination->surroundingItems($image, $offset);
 $prev_src = empty($surrounding_items['leading']) ? null : $surrounding_items['leading'][0]['filename'];
