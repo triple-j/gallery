@@ -7,7 +7,8 @@
 		"LEFT_ARROW"  : 37,
 		"UP_ARROW"    : 38,
 		"RIGHT_ARROW" : 39,
-		"DOWN_ARROW"  : 40
+		"DOWN_ARROW"  : 40,
+		"F"           : 70
 	};
 
 	$( document ).ready(function(){
@@ -45,8 +46,6 @@
 		$(document).on('keydown', function(evt){
 			var pressed = (evt.keyCode || evt.charCode);
 
-			//console.log( {pressed:pressed} );
-
 			if (isPopupActive()) {
 
 				switch ( pressed ) {
@@ -69,6 +68,10 @@
 					case key.DOWN_ARROW:
 						console.log( "Close Navigation" );
 						//gallery.close_nav(gallery);
+						break;
+					case key.F:
+						console.log( "Toggle Fullscreen" );
+						toggleFullScreen(document.getElementById('popup'));
 						break;
 				}
 			}
@@ -194,6 +197,31 @@
 			finished(this.width, this.height);
 		}
 		img.src = url;
+	}
+
+	function toggleFullScreen(element) {
+		if (!document.fullscreenElement &&    // alternative standard method
+				!document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+			if (element.requestFullscreen) {
+				element.requestFullscreen();
+			} else if (element.msRequestFullscreen) {
+				element.msRequestFullscreen();
+			} else if (element.mozRequestFullScreen) {
+				element.mozRequestFullScreen();
+			} else if (element.webkitRequestFullscreen) {
+				element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			}
+		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.msExitFullscreen) {
+				document.msExitFullscreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			}
+		}
 	}
 
 })( jQuery, window );
