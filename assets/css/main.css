@@ -57,21 +57,23 @@ nav.pages li a {
 /*START: image viewer */
 #viewer {
 	position: relative;
-	display: table;
+	/*display: table;*/
 
 	box-sizing: border-box;
+	overflow: hidden;
 
 	padding: 8px;
 	background-color: #222;
 	border: 1px solid #111;
 }
 #viewer .featured {
-	display: table-cell;
-	text-align: center;
+	/*display: table-cell;*/
+	text-align: left;
 	vertical-align: middle;
 }
 #viewer .featured .media {
-	float: left;  /* get rid of extra padding caused by whitespace */
+	/*float: left;  /* get rid of extra padding caused by whitespace */
+	vertical-align: middle;
 }
 #viewer .image-nav {
 	position: absolute;
@@ -155,11 +157,11 @@ nav.pages li a {
 }
 #popup {
 	position: fixed;
-	top: 5%;
-	left: 5%;
+	top: 2%;
+	left: 2%;
 
-	width: 90%;
-	height: 90%;
+	width: 96%;
+	height: 96%;
 
 	box-sizing: border-box;
 

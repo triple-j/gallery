@@ -24,6 +24,8 @@
 
 		$('#overlay').on('click', closePopup);
 
+		$(window).on('resize', resizeViewer);
+
 		window.addEventListener("popstate", function(evt) {
 			console.log("location: " + document.location + ", state: " + JSON.stringify(evt.state));
 
@@ -58,7 +60,7 @@
 				history.pushState({page: currentPage}, "page " + currentPage, url);
 			}
 
-			console.log(currentPage);
+			//console.log(currentPage);
 		});
 	}
 
@@ -87,12 +89,13 @@
 				history.pushState({image: currentImage}, "image " + currentImage, url);
 			}
 
-			console.log(currentImage);
+			//console.log(currentImage);
 		});
 	}
 
 	function openPopup() {
 		$('#overlay, #popup').addClass("active");
+		resizeViewer();
 	}
 
 	function closePopup() {
@@ -102,6 +105,57 @@
 		}
 
 		$('#overlay, #popup').removeClass("active");
+	}
+
+	function isPopupActive() {
+		return $('#popup').hasClass("active");
+	}
+
+	function resizeViewer() {
+		if ( isPopupActive() ) {
+			document.getElementById('viewer').style.width = $('#popup').width() + "px";
+			document.getElementById('viewer').style.height = $('#popup').height() + "px";
+
+			resizeMedia($('#viewer').width(), $('#viewer').height());
+		}
+	}
+
+	function resizeMedia(width, height) {
+		var $elm = $('#viewer .media');
+		var fit = function(fullWidth, fullHeight) {
+			var ratio = fullWidth / fullHeight;
+
+			var scale = Math.max(fullWidth / width, fullHeight / height);
+			var tmp_width  = Math.round(fullWidth / scale);
+			var tmp_height = Math.round(fullHeight / scale);
+
+			var tmp_top  = Math.round((height - tmp_height) / 2);
+			var tmp_left = Math.round((width - tmp_width) / 2);
+
+			$elm.css('width', tmp_width);
+			$elm.css('height', tmp_height);
+
+			$elm.css('margin-top', tmp_top);
+			$elm.css('margin-left', tmp_left);
+		};
+
+		fit(width, height);  // initial flash before correct dimensions
+
+		if ($elm.is('img')) {
+			getImageDimensions($elm.attr('src'), fit);
+		} else if ($elm.is('video')) {
+			$elm.get(0).addEventListener( "loadedmetadata", function (e) {
+				fit(this.videoWidth, this.videoHeight);
+			}, false );
+		}
+	}
+
+	function getImageDimensions( url, finished ) {
+		var img = new Image();
+		img.onload = function() {
+			finished(this.width, this.height);
+		}
+		img.src = url;
 	}
 
 })( jQuery, window );
