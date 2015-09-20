@@ -2,10 +2,15 @@
 
 	"use strict";
 
+	var key = {
+		"ESCAPE"      : 27,
+		"LEFT_ARROW"  : 37,
+		"UP_ARROW"    : 38,
+		"RIGHT_ARROW" : 39,
+		"DOWN_ARROW"  : 40
+	};
+
 	$( document ).ready(function(){
-		console.log("hi");
-
-
 		$('.pages').on('click', 'a', function(evt){
 			evt.preventDefault();
 
@@ -33,6 +38,39 @@
 				changePage( document.location, false );
 			} else if (evt.state.image) {
 				changeImage( document.location, false );
+			}
+		});
+
+
+		$(document).on('keydown', function(evt){
+			var pressed = (evt.keyCode || evt.charCode);
+
+			//console.log( {pressed:pressed} );
+
+			if (isPopupActive()) {
+
+				switch ( pressed ) {
+					case key.ESCAPE:
+						console.log( "Close Viewer" );
+						closePopup();
+						break;
+					case key.LEFT_ARROW:
+						console.log( "View Previous Image" );
+						$('#viewer .image-nav .prev').click();
+						break;
+					case key.RIGHT_ARROW:
+						console.log( "View Next Image" );
+						$('#viewer .image-nav .next').click();
+						break;
+					case key.UP_ARROW:
+						console.log( "Open Navigation" );
+						//gallery.open_nav(gallery);
+						break;
+					case key.DOWN_ARROW:
+						console.log( "Close Navigation" );
+						//gallery.close_nav(gallery);
+						break;
+				}
 			}
 		});
 	});
