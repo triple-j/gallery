@@ -82,12 +82,8 @@
 		if (addToHistory === undefined) { addToHistory = true; }
 		if (leavePopup === undefined) { leavePopup = false; }
 
-		$.ajax({
-			url: url,
-			type: "GET",
-			dataType: "html"
-		}).done(function(responseText) {
-			var $resDOM = $( "<div>" ).append( $.parseHTML( responseText ) );
+		loadExternalPage(url, function(element) {
+			var $resDOM = $(element);
 			var currentPage = $($resDOM.find('.pages .current').get(0)).text();
 
 			$('.pages').html($resDOM.find('.pages').get(0).innerHTML);
@@ -108,12 +104,8 @@
 	function changeImage( url, addToHistory ) {
 		if (addToHistory === undefined) { addToHistory = true; }
 
-		$.ajax({
-			url: url,
-			type: "GET",
-			dataType: "html"
-		}).done(function(responseText) {
-			var $resDOM = $( "<div>" ).append( $.parseHTML( responseText ) );
+		loadExternalPage(url, function(element) {
+			var $resDOM = $(element);
 			var currentImage = $($resDOM.find('#viewer .media').get(0)).attr('src');
 			var prevSaveUrl = window.saveUrl;
 			window.saveUrl = $($resDOM.find('#nav-links .gallery').get(0)).attr('href');
@@ -146,6 +138,7 @@
 		}
 
 		$('#overlay, #popup').removeClass("active");
+		$('#viewer *').remove();
 	}
 
 	function isPopupActive() {
@@ -222,6 +215,39 @@
 				document.webkitExitFullscreen();
 			}
 		}
+	}
+
+	function loadExternalPage(url, callback) {
+		var externalDOMElm = document.getElementById('externalDOM');
+		if (externalDOMElm === null) {
+			externalDOMElm = document.createElement('iframe');
+			externalDOMElm.id = "externalDOM";
+			document.body.appendChild(externalDOMElm);
+		}
+		externalDOMElm.style.display = "none";
+
+		externalDOMElm.onload = function() {
+			//hackElms = externalDOMElm.contentWindow.document.body.querySelector('[data-src]');
+			//for (var i = 0; i < hackElms.length; i++) {
+			//	hackElms[i].src = hackElms[i].dataset.src;
+			//}
+
+			callback( externalDOMElm.contentWindow.document.body );
+			externalDOMElm.parentNode.removeChild(externalDOMElm);
+		}
+
+		//externalDOMElm.src = url;
+		$.ajax({
+			url: url,
+			type: "GET",
+			dataType: "html"
+		}).done(function(responseText) {
+			//responseText = responseText.replace(/(<img.*?)\s+src=/g, "$1 data-src=");
+
+			externalDOMElm.contentWindow.document.open();
+			externalDOMElm.contentWindow.document.write( responseText );
+			externalDOMElm.contentWindow.document.close();
+		});
 	}
 
 })( jQuery, window );
