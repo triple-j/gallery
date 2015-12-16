@@ -221,7 +221,7 @@
 		var externalDOMElm = document.getElementById('externalDOM');
 		if (externalDOMElm === null) {
 			externalDOMElm = document.createElement('iframe');
-			externalDOMElm.id = "externalDOM";
+			externalDOMElm.id = "externalDOM-" + Date.now().toString(16);
 			document.body.appendChild(externalDOMElm);
 		}
 		externalDOMElm.style.display = "none";
